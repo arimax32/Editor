@@ -91,13 +91,13 @@ io.on('connection',(socket)=>{
 
     })
     socket.on("disconnect",()=>{
-        roomData.map((roomId)=>{
+        for(const roomId in roomData){
             let room = io.sockets.adapter.rooms[roomId];
             if(room.length == 0){
-                delete roomData[roomId];
-                delete Inputdata[roomId];
+                delete roomData[e.roomId];
+                delete Inputdata[e.roomId];
             }
-        })
+        }
     })
 })
 
