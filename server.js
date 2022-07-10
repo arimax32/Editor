@@ -87,14 +87,17 @@ io.on('connection',(socket)=>{
             socket.in(roomId).emit("disconnected",{socketId : id,username : socketMap[id]})
         })
         delete socketMap[id]
-        rooms.map((roomId)=>{
-            if(roomId != id){
+        socket.leave()
+
+    })
+    socket.on("disconnect",()=>{
+        roomData.map((roomId)=>{
+            let room = io.sockets.adapter.rooms[roomId];
+            if(room.length == 0){
                 delete roomData[roomId];
                 delete Inputdata[roomId];
             }
         })
-        socket.leave()
-
     })
 })
 
