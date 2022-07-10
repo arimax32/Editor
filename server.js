@@ -94,8 +94,8 @@ io.on('connection',(socket)=>{
         for(const roomId in roomData){
             let room = io.sockets.adapter.rooms[roomId];
             if(room.length == 0){
-                delete roomData[e.roomId];
-                delete Inputdata[e.roomId];
+                delete roomData[roomId];
+                delete Inputdata[roomId];
             }
         }
     })
