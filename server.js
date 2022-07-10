@@ -1,15 +1,40 @@
 const express = require('express');
 const http = require('http');
 const {Server} = require('socket.io');
+const cors = require('cors');
 const fetch = require('node-fetch');
 const path = require('path');
 
 const app = express();
+app.use(express.json());
+app.use(cors());
 
 const server =  http.createServer(app);
 const io = new Server(server);
 
 app.use(express.static('build'));
+app.use('/compile',async (req,res,next)=>{
+    const {code,lang,input} = req.body 
+     const fetch_response = await fetch("https://api.jdoodle.com/v1/execute", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        clientId: "f608249a407ffb24c664f73e220a8cb",
+        clientSecret:
+          "91e58d3c9ea93ef75f88dd1a0f91ec4df2811f23a32c85de24efafef3e1c2807",
+        script: code,
+        stdin: input,
+        language: lang,
+        versionIndex: "0"
+      })
+    })
+     const d = await fetch_response.json();
+     res.json(d);
+     next();
+});
 app.use((req,res,next)=>{
     res.sendFile(path.join(__dirname,'build','index.html'));
 });
@@ -74,5 +99,4 @@ io.on('connection',(socket)=>{
 })
 
 const PORT = process.env.PORT || 5000
-
-server.listen(PORT,()=>console.log("Server listening on port 5000"));
+server.listen(PORT,()=>console.log(`Server listening on port ${PORT}`));

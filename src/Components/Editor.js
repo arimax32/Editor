@@ -119,7 +119,7 @@ export default function Editor({socketRef,roomId}) {
     }
   }
   const compilecode =  async () =>{
-    fetch("http://localhost:3000/compile",{
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/compile`,{
         method : 'POST',
         headers : {'Accept': 'application/json','Content-Type' : 'application/json'},
         body : JSON.stringify({
