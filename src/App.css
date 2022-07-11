@@ -119,7 +119,7 @@
 }
 
 .MainEditor{
-  background: white;
+  background: #22092c;
 }
 
 .CodeMirror{
@@ -131,7 +131,7 @@
 
 #outputArea{
   height: auto;
-  margin-top: 0.5%;
+  margin-top: 1.5%;
   margin-left : 2%;
   line-height: 1.6;
   font-size: 15px;
