@@ -90,15 +90,16 @@ io.on('connection',(socket)=>{
         socket.leave()
 
     })
-//     socket.on("disconnect",()=>{
-//         for(const roomId in roomData){
-//             let room = io.sockets.adapter.rooms[roomId];
-//             if(room.length == 0){
-//                 delete roomData[roomId];
-//                 delete Inputdata[roomId];
-//             }
-//         }
-//     })
+    
+    socket.on("disconnect",()=>{
+        for(const roomId in roomData){
+            let room = io.sockets.adapter.rooms.get(roomId);
+            if(room === undefined){
+                delete roomData[roomId];
+                delete Inputdata[roomId];
+            }
+        }
+    })
 })
 
 const PORT = process.env.PORT || 5000
