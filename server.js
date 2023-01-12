@@ -13,6 +13,11 @@ const server =  http.createServer(app);
 const io = new Server(server);
 
 app.use(express.static('build'));
+
+app.use((req,res,next)=>{
+    res.sendFile(path.join(__dirname,'build','index.html'));
+});
+
 app.use('/compile',async (req,res,next)=>{
     const {code,lang,input} = req.body 
      const fetch_response = await fetch("https://api.jdoodle.com/v1/execute", {
@@ -34,9 +39,6 @@ app.use('/compile',async (req,res,next)=>{
      const d = await fetch_response.json();
      res.json(d);
      next();
-});
-app.use((req,res,next)=>{
-    res.sendFile(path.join(__dirname,'build','index.html'));
 });
 
 const socketMap = {};
