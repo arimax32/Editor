@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 const server =  http.createServer(app);
-const io = new Server(server);
+const io = new Server(server,{path : "/"});
 
 app.use(express.static('build'));
 app.use('/compile',async (req,res,next)=>{
