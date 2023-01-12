@@ -18,6 +18,7 @@ export default function EditorPage() {
       socketRef.current.on("connect_failed",(err) => handlError(err));
       const handlError = (e) =>{
         console.log(e);
+        console.log("gguhb");
         toast.error("Ther has been a connection error");
         routeNavigate("/");
       }
