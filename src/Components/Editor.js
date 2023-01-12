@@ -31,6 +31,7 @@ export default function Editor({socketRef,roomId}) {
       })
     }
     init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   useEffect(()=>{
@@ -79,6 +80,7 @@ export default function Editor({socketRef,roomId}) {
       socketRef.current.off("TurnCode");
       socketRef.current.off("setInput");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[socketRef.current])
 
   const getLanguage = () =>{
