@@ -15,7 +15,7 @@ export default function EditorPage() {
     const init = async () =>{
       socketRef.current = await initSocket();
       socketRef.current.on("connect_error",(err) => handlError(err));
-      socketRef.current.on("connect_failed",(err) => handlError(err));
+      //socketRef.current.on("connect_failed",(err) => handlError(err));
       const handlError = (e) =>{
         console.log(e);
         console.log("gguhb");
